@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58939CA62BD7178000370E19 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA52BD7178000370E19 /* LocationManager.swift */; };
+		58939CA82BD717B600370E19 /* FactFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA72BD717B600370E19 /* FactFetcher.swift */; };
 		DA70CEB62BCF12090069A951 /* NearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA70CEB52BCF12090069A951 /* NearbyApp.swift */; };
 		DA70CEB82BCF12090069A951 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA70CEB72BCF12090069A951 /* ContentView.swift */; };
 		DA70CEBA2BCF120B0069A951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA70CEB92BCF120B0069A951 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58939CA52BD7178000370E19 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		58939CA72BD717B600370E19 /* FactFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactFetcher.swift; sourceTree = "<group>"; };
 		DA70CEB22BCF12090069A951 /* Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA70CEB52BCF12090069A951 /* NearbyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyApp.swift; sourceTree = "<group>"; };
 		DA70CEB72BCF12090069A951 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 				DA70CEB72BCF12090069A951 /* ContentView.swift */,
 				DA70CEB92BCF120B0069A951 /* Assets.xcassets */,
 				DA70CEBB2BCF120B0069A951 /* Preview Content */,
+				58939CA52BD7178000370E19 /* LocationManager.swift */,
+				58939CA72BD717B600370E19 /* FactFetcher.swift */,
 			);
 			path = Nearby;
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 			files = (
 				DA70CEB82BCF12090069A951 /* ContentView.swift in Sources */,
 				DA70CEB62BCF12090069A951 /* NearbyApp.swift in Sources */,
+				58939CA62BD7178000370E19 /* LocationManager.swift in Sources */,
+				58939CA82BD717B600370E19 /* FactFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +435,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Nearby/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "App needs permission to use location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs permission to use location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -455,6 +465,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Nearby/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "App needs permission to use location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs permission to use location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
