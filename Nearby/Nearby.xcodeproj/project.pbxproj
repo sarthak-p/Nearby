@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		58939CA62BD7178000370E19 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA52BD7178000370E19 /* LocationManager.swift */; };
 		58939CA82BD717B600370E19 /* FactFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA72BD717B600370E19 /* FactFetcher.swift */; };
-		58939CAA2BD7232E00370E19 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58939CA92BD7232E00370E19 /* Config.plist */; };
 		58939CAC2BD9E02200370E19 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CAB2BD9E02200370E19 /* Fact.swift */; };
+		58939CAE2BDB5F1E00370E19 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58939CAD2BDB5F1E00370E19 /* config.plist */; };
 		DA70CEB62BCF12090069A951 /* NearbyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA70CEB52BCF12090069A951 /* NearbyApp.swift */; };
 		DA70CEB82BCF12090069A951 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA70CEB72BCF12090069A951 /* ContentView.swift */; };
 		DA70CEBA2BCF120B0069A951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA70CEB92BCF120B0069A951 /* Assets.xcassets */; };
@@ -40,8 +40,8 @@
 /* Begin PBXFileReference section */
 		58939CA52BD7178000370E19 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		58939CA72BD717B600370E19 /* FactFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactFetcher.swift; sourceTree = "<group>"; };
-		58939CA92BD7232E00370E19 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		58939CAB2BD9E02200370E19 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
+		58939CAD2BDB5F1E00370E19 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		DA70CEB22BCF12090069A951 /* Nearby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nearby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA70CEB52BCF12090069A951 /* NearbyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyApp.swift; sourceTree = "<group>"; };
 		DA70CEB72BCF12090069A951 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,8 +108,8 @@
 				DA70CEBB2BCF120B0069A951 /* Preview Content */,
 				58939CA52BD7178000370E19 /* LocationManager.swift */,
 				58939CA72BD717B600370E19 /* FactFetcher.swift */,
-				58939CA92BD7232E00370E19 /* Config.plist */,
 				58939CAB2BD9E02200370E19 /* Fact.swift */,
+				58939CAD2BDB5F1E00370E19 /* config.plist */,
 			);
 			path = Nearby;
 			sourceTree = "<group>";
@@ -247,8 +247,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA70CEBD2BCF120B0069A951 /* Preview Assets.xcassets in Resources */,
-				58939CAA2BD7232E00370E19 /* Config.plist in Resources */,
 				DA70CEBA2BCF120B0069A951 /* Assets.xcassets in Resources */,
+				58939CAE2BDB5F1E00370E19 /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
