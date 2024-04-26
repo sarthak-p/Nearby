@@ -108,7 +108,7 @@ iOSInjectionProject/
 
 ### Custom Files ###
 # Ignore custom configuration plist
-Config.plist
+/Config.plist
 
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode,cocoapods
 
