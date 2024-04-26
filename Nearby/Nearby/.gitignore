@@ -1,0 +1,42 @@
+config.plist
+
+# Xcode
+.DS_Store
+*/.DS_Store
+xcuserdata/
+
+# Build products
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.xcarchive
+*.xcworkspace/xcuserdata/
+
+# User-specific settings
+*.xcuserdatad/
+
+# Swift Package Manager
+.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+*/Pods/
+
+# Carthage
+Carthage/Checkouts
+Carthage/Build
+
+# Dependency Manager files
+Package.resolved
+.pins
+
+# IDE settings
+*.swp
+*.swo
+*.xccheckout
+*.xcuserstate
+
+
+
