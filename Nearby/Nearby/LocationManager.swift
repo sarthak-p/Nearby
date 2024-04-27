@@ -62,5 +62,3 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
 }
-
-

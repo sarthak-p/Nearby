@@ -7,7 +7,14 @@
 import Foundation
 
 struct Fact: Codable, Identifiable {
-    var id: UUID { UUID() } // For identifiable conformance, assuming each fact has a unique id
+    let id: UUID
     let title: String
     let description: String
+
+    init(id: UUID = UUID(), title: String, description: String) {
+        self.id = id
+        self.title = title
+        self.description = description
+    }
 }
+
