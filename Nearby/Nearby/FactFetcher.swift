@@ -9,7 +9,18 @@ import Foundation
 import Combine
 
 class FactFetcher: ObservableObject {
+    
     @Published var facts: [Fact] = []
+    
+    
+    init() {
+        // Mock data for testing
+        self.facts = [
+            Fact(title: "Fact 1", description: "Description 1"),
+            Fact(title: "Fact 2", description: "Description 2")
+            // Add more facts here
+        ]
+    }
 
     private var apiKey: String {
         guard let filePath = Bundle.main.path(forResource: "Config", ofType: "plist"),
