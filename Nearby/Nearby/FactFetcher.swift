@@ -17,8 +17,14 @@ class FactFetcher: ObservableObject {
          self.facts = [
              Fact(title: "Fact 1", description: "Description 1"),
              Fact(title: "Fact 2", description: "Description 2")
+            
              // Add more facts here
          ]
+        
+        Task {
+            await loadContent()
+        }
+        print("here1")
      }
     
     enum APIKey {
@@ -48,6 +54,7 @@ class FactFetcher: ObservableObject {
     
     func loadContent() async {
         do {
+            print("here2")
             let model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
             let prompt = "Write a story about a magic backpack."
             let response = try await model.generateContent(prompt)
