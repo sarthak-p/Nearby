@@ -18,6 +18,9 @@ struct ContentView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
+                    if factFetcher.facts.isEmpty {
+                        Text("No data loaded")
+                    } else {
                     ForEach(factFetcher.facts) { fact in
                         NavigationLink(destination: Text(fact.description)) { // Placeholder for detail view
                             VStack {
@@ -40,6 +43,7 @@ struct ContentView: View {
                             .cornerRadius(12)
                         }
                     }
+                }
                 }
                 .padding()
             }
