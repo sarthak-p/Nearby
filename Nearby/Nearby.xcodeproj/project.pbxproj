@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5886D7112BDC91BF0020117C /* GenerativeAI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5886D7102BDC91BF0020117C /* GenerativeAI-Info.plist */; };
 		588F80D92BDDE864005A8E40 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 588F80D82BDDE864005A8E40 /* GoogleGenerativeAI */; };
+		588F80DB2BDDFC25005A8E40 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 588F80DA2BDDFC25005A8E40 /* .gitignore */; };
 		58939CA62BD7178000370E19 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA52BD7178000370E19 /* LocationManager.swift */; };
 		58939CA82BD717B600370E19 /* FactFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA72BD717B600370E19 /* FactFetcher.swift */; };
 		58939CAC2BD9E02200370E19 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CAB2BD9E02200370E19 /* Fact.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		5886D7102BDC91BF0020117C /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
+		588F80DA2BDDFC25005A8E40 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		58939CA52BD7178000370E19 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		58939CA72BD717B600370E19 /* FactFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactFetcher.swift; sourceTree = "<group>"; };
 		58939CAB2BD9E02200370E19 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				58939CA72BD717B600370E19 /* FactFetcher.swift */,
 				58939CAB2BD9E02200370E19 /* Fact.swift */,
 				5886D7102BDC91BF0020117C /* GenerativeAI-Info.plist */,
+				588F80DA2BDDFC25005A8E40 /* .gitignore */,
 			);
 			path = Nearby;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				588F80DB2BDDFC25005A8E40 /* .gitignore in Resources */,
 				DA70CEBD2BCF120B0069A951 /* Preview Assets.xcassets in Resources */,
 				DA70CEBA2BCF120B0069A951 /* Assets.xcassets in Resources */,
 				5886D7112BDC91BF0020117C /* GenerativeAI-Info.plist in Resources */,

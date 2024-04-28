@@ -1,3 +1,4 @@
+
 GenerativeAI-Info.plist
 
 # Xcode
@@ -37,6 +38,5 @@ Package.resolved
 *.swo
 *.xccheckout
 *.xcuserstate
-
 
 

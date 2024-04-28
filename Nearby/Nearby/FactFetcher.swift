@@ -17,8 +17,6 @@ class FactFetcher: ObservableObject {
          self.facts = [
              Fact(title: "Fact 1", description: "Description 1"),
              Fact(title: "Fact 2", description: "Description 2")
-            
-             // Add more facts here
          ]
         
         Task {
@@ -48,9 +46,9 @@ class FactFetcher: ObservableObject {
       }
     }
     
-    func loadFacts(latitude: Double, longitude: Double) {
-        // Your existing code to load facts from an API
-    }
+//    func loadFacts(latitude: Double, longitude: Double) {
+//        // Your existing code to load facts from an API
+//    }
     
     func loadContent() async {
         do {
