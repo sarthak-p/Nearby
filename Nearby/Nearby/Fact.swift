@@ -6,15 +6,21 @@
 //
 import Foundation
 
-struct Fact: Codable, Identifiable {
-    let id: UUID
+struct Fact: Identifiable, Codable {
+    var id: UUID = UUID()
     let title: String
     let description: String
+    let imageUrl: String
 
-    init(id: UUID = UUID(), title: String, description: String) {
-        self.id = id
+    init(id: UUID? = nil, title: String, description: String, imageUrl: String) {
+        
         self.title = title
         self.description = description
+        self.imageUrl = imageUrl
     }
+    
+//    enum CodingKeys: String, CodingKey {
+//        case id, title, description, imageUrl
+//    }
 }
 
