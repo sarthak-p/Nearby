@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ContentView: View {
-    @ObservedObject var factFetcher = FactFetcher() // For simplicity, using ObservedObject here
+    @ObservedObject var factFetcher = FactFetcher()
 
     let columns = [
         GridItem(.adaptive(minimum: 150))
@@ -17,46 +18,68 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    if factFetcher.facts.isEmpty {
-                        Text("No data loaded")
-                    } else {
-                    ForEach(factFetcher.facts) { fact in
-                        NavigationLink(destination: Text(fact.description)) { // Placeholder for detail view
-                            VStack {
-                                Image(systemName: "book.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 100)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .cornerRadius(8)
-                                
-                                Text(fact.title)
-                                    .fontWeight(.semibold)
-                                    .multilineTextAlignment(.center)
-                                    .padding()
+                if factFetcher.isLoading {
+                    VStack {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                            .scaleEffect(1.5)
+                        Text("Loading facts...")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                    }
+                } else {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(factFetcher.facts) { fact in
+                            NavigationLink(destination: Text(fact.description)) {
+                                FactTile(fact: fact)
                             }
-                            .frame(maxWidth: .infinity, minHeight: 150)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(12)
                         }
                     }
                 }
-                }
-                .padding()
             }
-            .navigationTitle("Nearby")
+            .navigationTitle(factFetcher.locationName)
+            .navigationBarTitleDisplayMode(.inline)
+            .padding()
         }
     }
 }
 
+struct FactTile: View {
+  var fact: Fact
+
+  var body: some View {
+    VStack {
+      KFImage(URL(string: fact.imageUrl))
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .frame(width: 100, height: 100)
+        .clipped()
+        .cornerRadius(8)
+//        .placeholder { url in
+//          KFImage(url: URL(string: "your_placeholder_image_url"))
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 100, height: 100)
+//            .clipped()
+//        }
+
+      Text(fact.title)
+        .fontWeight(.semibold)
+        .multilineTextAlignment(.center)
+        .padding()
+    }
+    .frame(maxWidth: .infinity, minHeight: 150)
+    .background(Color.gray.opacity(0.2))
+    .cornerRadius(12)
+  }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(factFetcher: FactFetcher())
+        ContentView()
     }
 }
+
 
 //import SwiftUI
 //
@@ -100,41 +123,6 @@ struct ContentView_Previews: PreviewProvider {
 //                .padding()
 //            }
 //            .navigationTitle("Nearby Historical Facts")
-//        }
-//    }
-//}
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
-
-
-
-
-
-//import SwiftUI
-//
-//struct ContentView: View {
-//    @StateObject var factFetcher = FactFetcher() // Using StateObject for owning the object
-//
-//    var body: some View {
-//        NavigationView {
-//            List(factFetcher.facts) { fact in
-//                VStack(alignment: .leading) {
-//                    Text(fact.title)
-//                        .font(.headline)
-//                    Text(fact.description)
-//                        .font(.subheadline)
-//                }
-//            }
-//            .navigationTitle("Facts About the Place")
-//            .onAppear {
-//                Task {
-//                    await factFetcher.loadContent()
-//                }
-//            }
 //        }
 //    }
 //}
