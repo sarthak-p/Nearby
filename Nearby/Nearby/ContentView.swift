@@ -9,8 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct ContentView: View {
-    @ObservedObject var factFetcher = FactFetcher()
-    @StateObject private var locationManager = LocationManager()
+    @StateObject private var factFetcher = FactFetcher()
+//    @StateObject private var locationManager = LocationManager()
     @ObservedObject private var notificationManager = NotificationManager()
     
 

@@ -14,21 +14,32 @@ class FactFetcher: ObservableObject {
     @Published var facts: [Fact] = []
     @Published var isLoading = true
     private var currentLocation: CLLocation?
+    private var locationManager = LocationManager.shared
     private var retryCount = 0
     private let maxRetries = 4 // Maximum number of retries
 
     init() {
-//        Task {
-//            await loadContent (with: <#CLLocation?#>)
-//        }
-    }
-    
-    func updateLocation(_ location: CLLocation) async {
-            currentLocation = location
-            // Optionally trigger fetching facts whenever the location updates
-             print("here")
-        await loadContent()
+        locationManager.onLocationUpdate = { [weak self] location in
+            guard let self = self else { return }
+            self.currentLocation = location // Set the current location
+
+            // Start the task to load content
+            Task {
+                await self.loadContent(using: location)
+            }
         }
+        locationManager.start()
+    }
+
+
+
+    
+//    func updateLocation(_ location: CLLocation) async {
+//            currentLocation = location
+//            // Optionally trigger fetching facts whenever the location updates
+//             print("here")
+//        await loadContent()
+//        }
     
         enum APIKey {
           /// Fetch the API key from `GenerativeAI-Info.plist`
@@ -54,17 +65,15 @@ class FactFetcher: ObservableObject {
     
     
     
-    func loadContent() async {
-        
-        guard let location = currentLocation else {
-                    print("Location is not set")
-                    return
-                }
+    func loadContent(using location: CLLocation) async{
+        guard !isLoading else {
+            print("Currently loading, please wait.")
+            return
+        }
 
                 isLoading = true
-                let locationName = "Aurora, IL"
-//        "\(location.coordinate.latitude), \(location.coordinate.longitude)" // Format as needed
-                print(locationName)
+        let locationName = "\(location.coordinate.latitude), \(location.coordinate.longitude)" // Format as needed
+        print("Location: \(locationName)")
                 
         
             do {
@@ -110,6 +119,7 @@ class FactFetcher: ObservableObject {
                                 if let fetchedData = decodeJSON(jsonData: jsonData) {
                                     DispatchQueue.main.async {
                                         self.facts = fetchedData.facts
+                                        self.isLoading = false
                                     }
                                 } else {
                                     await retryLoadingContent()
@@ -125,18 +135,24 @@ class FactFetcher: ObservableObject {
                 self.isLoading = false
             } catch {
                 print("Error generating content: \(error)")
+                self.isLoading = false
             }
         }
     
-    private func retryLoadingContent() async{
+    private func retryLoadingContent() async {
         if retryCount < maxRetries {
             retryCount += 1
             print("Retrying... Attempt \(retryCount)")
-            await loadContent()
+            if let location = currentLocation {
+                await loadContent(using: location)
+            } else {
+                print("No location available for retry")
+            }
         } else {
             print("Max retries reached. Unable to load valid JSON data.")
         }
     }
+
 
 
     func isValidJSON(_ jsonString: String) -> Bool {
