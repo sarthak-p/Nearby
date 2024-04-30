@@ -8,17 +8,27 @@
 import Foundation
 import Combine
 import GoogleGenerativeAI
+import CoreLocation
 
 class FactFetcher: ObservableObject {
     @Published var facts: [Fact] = []
     @Published var isLoading = true
-    @Published var locationName = ""
+    private var currentLocation: CLLocation?
+    private var retryCount = 0
+    private let maxRetries = 4 // Maximum number of retries
 
     init() {
-        Task {
-            await loadContent ()
-        }
+//        Task {
+//            await loadContent (with: <#CLLocation?#>)
+//        }
     }
+    
+    func updateLocation(_ location: CLLocation) async {
+            currentLocation = location
+            // Optionally trigger fetching facts whenever the location updates
+             print("here")
+        await loadContent()
+        }
     
         enum APIKey {
           /// Fetch the API key from `GenerativeAI-Info.plist`
@@ -42,15 +52,28 @@ class FactFetcher: ObservableObject {
         }
     
     
+    
+    
     func loadContent() async {
+        
+        guard let location = currentLocation else {
+                    print("Location is not set")
+                    return
+                }
+
+                isLoading = true
+                let locationName = "Aurora, IL"
+//        "\(location.coordinate.latitude), \(location.coordinate.longitude)" // Format as needed
+                print(locationName)
+                
+        
             do {
                 let model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
-//                let locationName = "Westmont, Chicago" // Example location name
-                self.locationName = "Westmont, Chicago" // Example location name
+//                self.locationName = "Westmont, Chicago" // Example location name
 
 
                 let prompt = """
-                Give a detailed report on \(locationName) including very interesting historical facts, notable events, cultural significance, intriguing and obscure details, lesser-known aspects, and hidden gems that most people might not know. Please provide each fact with a concise title (must be captivating), a more detailed description and an image to accompany the fact. The image url must be from Google and usable in swift. Give me at least 10 results. The results must be returned in a valid JSON format with properly quoted fields. Here is an example of how the JSON should look:
+                Give a detailed report on \(locationName) including very interesting historical facts, notable events, cultural significance, intriguing and obscure details, lesser-known aspects, and hidden gems that most people might not know. Please provide each fact with a concise title (must be captivating), a more detailed description and an image to accompany the fact. The image url must be from Google and usable in swift. Provide the webpage for the fact, event, places if one exists. Give me at least 10 results. The results must be returned in a valid JSON format with properly quoted fields. Here is an example of how the JSON should look:
                 {
                   "location": "\(locationName)",
                   "facts": [
@@ -58,16 +81,19 @@ class FactFetcher: ObservableObject {
                       "title": "Title of Fact 1",
                       "description": "Detailed description of Fact 1",
                       "imageUrl": "https://example.com/path/to/image1.jpg"
+                      "url": "https://example.com"
                     },
                     {
                       "title": "Title of Fact 2",
                       "description": "Detailed description of Fact 2",
                       "imageUrl": "https://example.com/path/to/image2.jpg"
+                      "url": "https://example.com"
                     },
                     {
                       "title": "Title of Fact 3",
                       "description": "Detailed description of Fact 3",
                       "imageUrl": "https://example.com/path/to/image3.jpg"
+                      "url": "https://example.com"
                     }
                     // Additional facts can be added in the same structure
                   ]
@@ -85,9 +111,15 @@ class FactFetcher: ObservableObject {
                                     DispatchQueue.main.async {
                                         self.facts = fetchedData.facts
                                     }
+                                } else {
+                                    await retryLoadingContent()
                                 }
+                            } else {
+                                await retryLoadingContent()
                             }
                         }
+                    } else {
+                        await retryLoadingContent()
                     }
                 }
                 self.isLoading = false
@@ -95,6 +127,16 @@ class FactFetcher: ObservableObject {
                 print("Error generating content: \(error)")
             }
         }
+    
+    private func retryLoadingContent() async{
+        if retryCount < maxRetries {
+            retryCount += 1
+            print("Retrying... Attempt \(retryCount)")
+            await loadContent()
+        } else {
+            print("Max retries reached. Unable to load valid JSON data.")
+        }
+    }
 
 
     func isValidJSON(_ jsonString: String) -> Bool {
@@ -122,15 +164,15 @@ class FactFetcher: ObservableObject {
 
                 var factIndex = 0
                 for fact in facts {
-                    guard let title = fact["title"] as? String else {
+                    guard fact["title"] is String else {
                         print("Error: 'title' is missing or is not a string in fact at index \(factIndex).")
                         return false
                     }
-                    guard let description = fact["description"] as? String else {
+                    guard fact["description"] is String else {
                         print("Error: 'description' is missing or is not a string in fact at index \(factIndex).")
                         return false
                     }
-                    guard let imageUrl = fact["imageUrl"] as? String else {
+                    guard fact["imageUrl"] is String else {
                         print("Error: 'imageUrl' is missing or is not a string in fact at index \(factIndex).")
                         return false
                     }

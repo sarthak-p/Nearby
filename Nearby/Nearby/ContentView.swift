@@ -10,6 +10,9 @@ import Kingfisher
 
 struct ContentView: View {
     @ObservedObject var factFetcher = FactFetcher()
+    @StateObject private var locationManager = LocationManager()
+    @ObservedObject private var notificationManager = NotificationManager()
+    
 
     let columns = [
         GridItem(.adaptive(minimum: 150))
@@ -37,9 +40,13 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle(factFetcher.locationName)
+            .navigationTitle("Nearby")
             .navigationBarTitleDisplayMode(.inline)
             .padding()
+//            .onAppear {
+//                notificationManager.requestAuthorization() // Request notification permission on appear
+//                locationManager.startUpdatingLocation // Start updating location on appear
+//                        }
         }
     }
 }

@@ -1,64 +1,88 @@
 //
-//  LocationManager.swift
+//  NotificationManager.swift
 //  Nearby
 //
-//  Created by Sai Samarth Patipati Umesh on 4/22/24.
+//  Created by Sai Samarth Patipati Umesh on 4/28/24.
 //
 
+import Foundation
 import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private let locationManager = CLLocationManager()
     @Published var currentLocation: CLLocation?
+    var factFetcher: FactFetcher?
 
     override init() {
         super.init()
         locationManager.delegate = self
-        // Set the desired accuracy of the location data
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        // Ask for the user's permission to access location data
-        locationManager.requestWhenInUseAuthorization()
-    }
-
-    func start() {
-        // Start updating the location
-        locationManager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // Set the desired accuracy
+        locationManager.requestWhenInUseAuthorization() // Request appropriate authorization from the user
+        locationManager.startUpdatingLocation() // Start updating location
     }
     
-    func stop() {
-        // Stop updating the location
-        locationManager.stopUpdatingLocation()
-    }
-
-    // MARK: - CLLocationManagerDelegate Methods
-
-    // This method is called when the location manager has new location data
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // We're interested in the last location, which is the most recent
-        if let location = locations.last {
-            // Update the published currentLocation property
-            currentLocation = location
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.startUpdatingLocation()
+            } else {
+                print("Location services are not enabled")
+            }
+        case .restricted, .denied:
+            print("Location access was restricted or denied.")
+        @unknown default:
+            print("Unknown authorization status")
         }
     }
+
     
-    // This method is called when there's an error obtaining the location
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // Handle error, e.g., by printing it to the console
-        print("Error obtaining location: \(error)")
+    func startLocationUpdates() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        } else {
+            print("Location services are not enabled")
+        }
     }
 
-    // This method is called when the authorization status changes
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        // Check the authorization status and react accordingly
-        switch manager.authorizationStatus {
-        case .notDetermined, .restricted, .denied:
-            // Location access was denied or restricted
-            break
-        case .authorizedAlways, .authorizedWhenInUse:
-            // Start location updates if the app is authorized
-            start()
-        default:
-            break
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) async {
+        guard let newLocation = locations.last else { 
+            print("No locations available")
+            return }
+        print("New location: \(newLocation)")
+        DispatchQueue.main.async {
+                self.currentLocation = newLocation
+//                self.factFetcher?.updateLocation(newLocation)
+            }
+        
+        Task {
+               await factFetcher?.updateLocation(newLocation)
+               // if you have any additional async functions to call, you can do so here
+           }
+        
+//        currentLocation = newLocation // Update the current location
+//        // Here you can add code to fetch new facts using newLocation if needed
+//        await factFetcher?.loadContent(with: currentLocation)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if let clError = error as? CLError {
+            switch clError.code {
+            case .locationUnknown:
+                print("Location unknown, retrying")
+                locationManager.startUpdatingLocation()
+            case .denied:
+                print("Access to location services denied by the user")
+            case .network:
+                print("Network-related error occurred while retrieving location")
+            default:
+                print("Other Core Location error: \(clError.localizedDescription)")
+            }
+        } else {
+            print("Failed to find user's location: \(error.localizedDescription)")
         }
     }
 }
