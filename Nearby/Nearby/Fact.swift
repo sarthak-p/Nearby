@@ -33,7 +33,6 @@
 //    }
 //}
 
-
 import Foundation
 
 struct Fact: Identifiable, Codable {
@@ -41,18 +40,19 @@ struct Fact: Identifiable, Codable {
     let title: String
     let description: String
     let imageUrl: String
+    let url: String
 
     enum CodingKeys: String, CodingKey {
-        case title, description, imageUrl
-        // 'id' is deliberately omitted from CodingKeys to prevent it from being required in JSON
+        case title, description, imageUrl, url
     }
 
     // Provide a default initializer that generates a new UUID
-    init(id: UUID = UUID(), title: String, description: String, imageUrl: String) {
+    init(id: UUID = UUID(), title: String, description: String, imageUrl: String, url: String) {
         self.id = id
         self.title = title
         self.description = description
         self.imageUrl = imageUrl
+        self.url = url
     }
 
     // Custom initializer for decoding
@@ -63,6 +63,7 @@ struct Fact: Identifiable, Codable {
         title = try container.decode(String.self, forKey: .title)
         description = try container.decode(String.self, forKey: .description)
         imageUrl = try container.decode(String.self, forKey: .imageUrl)
+        url = try container.decode(String.self, forKey: .url)
     }
 }
 
@@ -70,7 +71,4 @@ struct ResponseStructure: Codable {
     let location: String
     let facts: [Fact]
 }
-
-
-
 
