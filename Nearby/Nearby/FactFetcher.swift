@@ -19,28 +19,35 @@ class FactFetcher: ObservableObject {
     private let maxRetries = 4 // Maximum number of retries
 
     init() {
-        locationManager.onLocationUpdate = { [weak self] location in
-            guard let self = self else { return }
-            self.currentLocation = location // Set the current location
+//        locationManager.onLocationUpdate = { [weak self] location in
+//            guard let self = self else { return }
+//            self.currentLocation = location // Set the current location
+//
+//            // Start the task to load content
+        
+        LocationManager.shared.getLocation { (location:CLLocation?, error:NSError?) in
 
-            // Start the task to load content
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    
+                    guard let location = location else {
+                        return
+                    }
             Task {
                 await self.loadContent(using: location)
             }
-        }
-        locationManager.start()
+                    self.currentLocation = location
+                    print("Latitude: \(location.coordinate.latitude) Longitude: \(location.coordinate.longitude)")
+                }
+           
+//        }
+//        locationManager.start()
+
     }
 
 
-
-    
-//    func updateLocation(_ location: CLLocation) async {
-//            currentLocation = location
-//            // Optionally trigger fetching facts whenever the location updates
-//             print("here")
-//        await loadContent()
-//        }
-    
         enum APIKey {
           /// Fetch the API key from `GenerativeAI-Info.plist`
           /// This is just *one* way how you can retrieve the API key for your app.
@@ -65,22 +72,22 @@ class FactFetcher: ObservableObject {
     
     
     
-    func loadContent(using location: CLLocation) async{
-        guard !isLoading else {
-            print("Currently loading, please wait.")
-            return
-        }
-
-                isLoading = true
-        let locationName = "\(location.coordinate.latitude), \(location.coordinate.longitude)" // Format as needed
-        print("Location: \(locationName)")
-                
-        
+    func loadContent(using location: CLLocation?) async{
+        if let location = currentLocation {
+            //                isLoading = true
+            //                let locationName = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
+            // Proceed with using locationName
+            
+            isLoading = true
+            let locationName = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
+            print("Location: \(locationName)")
+            
+            
             do {
                 let model = GenerativeModel(name: "gemini-pro", apiKey: APIKey.default)
-//                self.locationName = "Westmont, Chicago" // Example location name
-
-
+                //                self.locationName = "Westmont, Chicago" // Example location name
+                
+                
                 let prompt = """
                 Give a detailed report on \(locationName) including very interesting historical facts, notable events, cultural significance, intriguing and obscure details, lesser-known aspects, and hidden gems that most people might not know. Please provide each fact with a concise title (must be captivating), a more detailed description and an image to accompany the fact. The image url must be from Google and usable in swift. Provide the webpage for the fact, event, places if one exists. Give me at least 10 results. The results must be returned in a valid JSON format with properly quoted fields. Here is an example of how the JSON should look:
                 {
@@ -110,7 +117,7 @@ class FactFetcher: ObservableObject {
                 Return in exactly the above format. Do not add anything extra before or after.
                 """
                 let response = try await model.generateContent(prompt)
-            
+                
                 if let text = response.text {
                     print(text)
                     if isValidJSON(text) {
@@ -137,6 +144,9 @@ class FactFetcher: ObservableObject {
                 print("Error generating content: \(error)")
                 self.isLoading = false
             }
+        } else {
+            print("Location is not set")
+        }
         }
     
     private func retryLoadingContent() async {
