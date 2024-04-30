@@ -16,6 +16,7 @@ class FactFetcher: ObservableObject {
     private var currentLocation: CLLocation?
     private var locationManager = LocationManager.shared
     private var retryCount = 0
+    private var postal: String?
     private let maxRetries = 4 // Maximum number of retries
 
     init() {
@@ -24,6 +25,27 @@ class FactFetcher: ObservableObject {
 //            self.currentLocation = location // Set the current location
 //
 //            // Start the task to load content
+        
+//        LocationManager.shared.getCurrentReverseGeoCodedLocation { (location:CLLocation?, placemark:CLPlacemark?, error:NSError?) in
+//                    
+//                    if let error = error {
+//                        print(error.localizedDescription)
+//                        return
+//                    }
+//                    
+//                    guard let location = location, let placemark = placemark else {
+//                        return
+//                    }
+//            
+//                    
+//                    //We get the complete placemark and can fetch anything from CLPlacemark
+//            print(location)
+//            print(placemark.postalCode ?? "No street name available")
+//            self.postal = placemark.postalCode
+//            Task {
+//                await self.loadContent(using: placemark.postalCode)
+//            }
+//        }
         
         LocationManager.shared.getLocation { (location:CLLocation?, error:NSError?) in
 
@@ -42,7 +64,7 @@ class FactFetcher: ObservableObject {
                     print("Latitude: \(location.coordinate.latitude) Longitude: \(location.coordinate.longitude)")
                 }
            
-//        }
+        
 //        locationManager.start()
 
     }
@@ -80,6 +102,7 @@ class FactFetcher: ObservableObject {
             
             isLoading = true
             let locationName = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
+//            let locationName = location
             print("Location: \(locationName)")
             
             
