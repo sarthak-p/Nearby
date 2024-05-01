@@ -41,18 +41,22 @@ struct Fact: Identifiable, Codable {
     let description: String
     let imageUrl: String
     let url: String
+    let latitude: Double
+    let longitude: Double
 
     enum CodingKeys: String, CodingKey {
-        case title, description, imageUrl, url
+        case title, description, imageUrl, url, latitude, longitude
     }
 
     // Provide a default initializer that generates a new UUID
-    init(id: UUID = UUID(), title: String, description: String, imageUrl: String, url: String) {
+    init(id: UUID = UUID(), title: String, description: String, imageUrl: String, url: String, latitude: Double, longitude: Double) {
         self.id = id
         self.title = title
         self.description = description
         self.imageUrl = imageUrl
         self.url = url
+        self.latitude = latitude
+        self.longitude = longitude
     }
 
     // Custom initializer for decoding
@@ -64,6 +68,8 @@ struct Fact: Identifiable, Codable {
         description = try container.decode(String.self, forKey: .description)
         imageUrl = try container.decode(String.self, forKey: .imageUrl)
         url = try container.decode(String.self, forKey: .url)
+        latitude = try container.decode(Double.self, forKey: .latitude)
+        longitude = try container.decode(Double.self, forKey: .longitude)
     }
 }
 
