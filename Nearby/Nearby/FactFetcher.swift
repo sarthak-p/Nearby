@@ -150,7 +150,7 @@ class FactFetcher: ObservableObject {
                     
                     
                     let prompt = """
-                Give a detailed report on \(locationDescription) including very interesting historical facts, notable events, cultural significance, intriguing and obscure details, lesser-known aspects, and hidden gems that most people might not know. Please provide each fact with a concise title (must be captivating), a more detailed description and an image to accompany the fact. The image url must be from Google and usable in swift. Provide an address for the fact, event, places in latitude and longitude. Provide the official webpage for the fact, event, places if one exists. Do not give a wikipedia page. Give me at least 10 results. The results must be returned in a valid JSON format with properly quoted fields. Here is an example of how the JSON should look:
+                Give a detailed report on \(locationDescription) including very interesting historical facts, notable events, cultural significance, intriguing and obscure details, lesser-known aspects, and hidden gems that most people might not know. Please provide each fact with a concise title (must be captivating), a more detailed description and an image to accompany the fact. Get the image url from images.google.com and it should usable in swift and a jpg file. Provide an address for the fact, event, places in latitude and longitude. Provide the official webpage for the fact, event, places if one exists. Do not give wikipedia pages for the URLs. Give me at least 10 results. The results must be returned in a valid JSON format with properly quoted fields. Here is an example of how the JSON should look:
                 {
                   "location": "\(locationDescription)",
                   "facts": [
@@ -168,7 +168,7 @@ class FactFetcher: ObservableObject {
                       "imageUrl": "https://example.com/path/to/image2.jpg"
                       "url": "https://example.com"
                       "latitude of where the fact is if it's a place": 40.712776
-                       "longitude of where the fact is if it's a place": -74.005974
+                      "longitude of where the fact is if it's a place": -74.005974
                     },
                     {
                       "title": "Title of Fact 3",
@@ -220,7 +220,7 @@ class FactFetcher: ObservableObject {
             if retryCount < maxRetries {
                 retryCount += 1
                 print("Retrying... Attempt \(retryCount)")
-                if let locationDescription = currentLocationDescription{
+                if let locationDescription = currentLocationDescription {
                     await loadContent()
                 } else {
                     print("No location available for retry")
