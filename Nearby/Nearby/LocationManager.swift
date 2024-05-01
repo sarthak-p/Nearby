@@ -20,6 +20,7 @@ final class LocationManager: NSObject {
         case unknown = "Some Unknown Error occurred"
     }
     
+    
     typealias LocationClosure = ((_ location:CLLocation?,_ error: NSError?)->Void)
     private var locationCompletionHandler: LocationClosure?
     
