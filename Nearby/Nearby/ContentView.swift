@@ -56,6 +56,7 @@ struct FactTile: View {
                 .frame(width: 100, height: 100)
                 .clipped()
                 .cornerRadius(8)
+                .padding()
 
             Text(fact.title)
                 .fontWeight(.semibold)
@@ -74,11 +75,17 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
+                Text("Description: ")
                 Text(fact.description)
                     .padding()
                 
                 MapView(coordinate: CLLocationCoordinate2D(latitude: fact.latitude, longitude: fact.longitude))
                     .frame(height: 300)
+                    .cornerRadius(15)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
                 
                 Link("Learn More", destination: URL(string: fact.url)!)
                     .padding()
@@ -89,13 +96,37 @@ struct DetailView: View {
     }
 }
 
+
 struct MapView: View {
     var coordinate: CLLocationCoordinate2D
     
+    @State private var region: MKCoordinateRegion
+
+    init(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
+        _region = State(initialValue: MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)))
+    }
+    
     var body: some View {
-        Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))), annotationItems: [MapAnnotationItem(coordinate: coordinate)]) { item in
-            MapPin(coordinate: item.coordinate)
+        Map(coordinateRegion: $region, annotationItems: [MapAnnotationItem(coordinate: coordinate)]) { item in
+            MapAnnotation(coordinate: item.coordinate) {
+                Button(action: {
+                    self.openMaps(coordinate: item.coordinate)
+                }) {
+                    Image(systemName: "mappin.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+            }
         }
+    }
+    
+    private func openMaps(coordinate: CLLocationCoordinate2D) {
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Destination"
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
 }
 
