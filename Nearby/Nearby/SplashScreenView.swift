@@ -22,7 +22,7 @@ struct SplashScreenView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80, height: 80)
                 
-                Text("Epic App")
+                Text("Nearby")
                     .font(Font.custom("Baskerville-Bold", size: 26))
                     .foregroundColor(.white)  // Lighter text color for better visibility
             }
