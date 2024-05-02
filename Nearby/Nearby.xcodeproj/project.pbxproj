@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5867133E2BE2E6A300CCCF8B /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 5867133D2BE2E6A300CCCF8B /* GoogleGenerativeAI */; };
+		586713402BE2E6AF00CCCF8B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5867133F2BE2E6AF00CCCF8B /* Kingfisher */; };
+		586713422BE4501000CCCF8B /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586713412BE4501000CCCF8B /* SplashScreenView.swift */; };
 		5886D7112BDC91BF0020117C /* GenerativeAI-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5886D7102BDC91BF0020117C /* GenerativeAI-Info.plist */; };
-		588F80D92BDDE864005A8E40 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 588F80D82BDDE864005A8E40 /* GoogleGenerativeAI */; };
 		588F80DB2BDDFC25005A8E40 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 588F80DA2BDDFC25005A8E40 /* .gitignore */; };
-		588F80DE2BDF12B9005A8E40 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 588F80DD2BDF12B9005A8E40 /* Kingfisher */; };
 		588F80E02BDF4678005A8E40 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588F80DF2BDF4678005A8E40 /* NotificationManager.swift */; };
 		58939CA62BD7178000370E19 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA52BD7178000370E19 /* LocationManager.swift */; };
 		58939CA82BD717B600370E19 /* FactFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58939CA72BD717B600370E19 /* FactFetcher.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		585477482BDF52F000A990F4 /* Nearby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nearby.entitlements; sourceTree = "<group>"; };
 		585477492BE06AAA00A990F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		586713412BE4501000CCCF8B /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		5886D7102BDC91BF0020117C /* GenerativeAI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenerativeAI-Info.plist"; sourceTree = "<group>"; };
 		588F80DA2BDDFC25005A8E40 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		588F80DF2BDF4678005A8E40 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -69,8 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				588F80DE2BDF12B9005A8E40 /* Kingfisher in Frameworks */,
-				588F80D92BDDE864005A8E40 /* GoogleGenerativeAI in Frameworks */,
+				586713402BE2E6AF00CCCF8B /* Kingfisher in Frameworks */,
+				5867133E2BE2E6A300CCCF8B /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +137,7 @@
 				5886D7102BDC91BF0020117C /* GenerativeAI-Info.plist */,
 				588F80DA2BDDFC25005A8E40 /* .gitignore */,
 				588F80DF2BDF4678005A8E40 /* NotificationManager.swift */,
+				586713412BE4501000CCCF8B /* SplashScreenView.swift */,
 			);
 			path = Nearby;
 			sourceTree = "<group>";
@@ -181,8 +184,8 @@
 			);
 			name = Nearby;
 			packageProductDependencies = (
-				588F80D82BDDE864005A8E40 /* GoogleGenerativeAI */,
-				588F80DD2BDF12B9005A8E40 /* Kingfisher */,
+				5867133D2BE2E6A300CCCF8B /* GoogleGenerativeAI */,
+				5867133F2BE2E6AF00CCCF8B /* Kingfisher */,
 			);
 			productName = Nearby;
 			productReference = DA70CEB22BCF12090069A951 /* Nearby.app */;
@@ -311,6 +314,7 @@
 				DAE7BA0D2BE2B5C1008656D6 /* LocationManagerWrapper.swift in Sources */,
 				58939CA62BD7178000370E19 /* LocationManager.swift in Sources */,
 				58939CA82BD717B600370E19 /* FactFetcher.swift in Sources */,
+				586713422BE4501000CCCF8B /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,12 +669,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		588F80D82BDDE864005A8E40 /* GoogleGenerativeAI */ = {
+		5867133D2BE2E6A300CCCF8B /* GoogleGenerativeAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA70CEDF2BCF29200069A951 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
 			productName = GoogleGenerativeAI;
 		};
-		588F80DD2BDF12B9005A8E40 /* Kingfisher */ = {
+		5867133F2BE2E6AF00CCCF8B /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 588F80DC2BDF12B9005A8E40 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
