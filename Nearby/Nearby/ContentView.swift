@@ -40,7 +40,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity) // Ensure content uses full width
+                .frame(maxWidth: .infinity) // Ensure content uses full widthc
             }
             .navigationTitle("Nearby")
             .navigationBarTitleDisplayMode(.inline)
