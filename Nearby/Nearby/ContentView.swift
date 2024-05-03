@@ -5,8 +5,10 @@ extension Color {
     static let customDarkBrown = Color(red: 56 / 255, green: 21 / 255, blue: 14 / 255)
     static let customCream = Color(red: 237 / 255, green: 230 / 255, blue: 211 / 255)
     static let customOliveGreen = Color(red: 92 / 255, green: 112 / 255, blue: 77 / 255)
+static let customGreen = Color(red: 241 / 255, green: 241 / 255, blue: 241 / 255)
     static let customRedBrown = Color(red: 179 / 255, green: 82 / 255, blue: 57 / 255)
     static let customDarkRed = Color(red: 166 / 255, green: 62 / 255, blue: 38 / 255)
+    static let customDarkBlue = Color(red: 3 / 255, green: 39 / 255, blue: 68 / 255)
 }
 
 struct ContentView: View {
@@ -26,11 +28,11 @@ struct ContentView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .background(Color.customCream) // Using custom color
+                .background(Color.customGreen) // Using custom color
             }
             .navigationTitle("Nearby")
             .navigationBarTitleDisplayMode(.inline)
-            .background(Color.customDarkBrown.edgesIgnoringSafeArea(.all))
+            .background(Color.customDarkBlue.edgesIgnoringSafeArea(.all))
         }
         .accentColor(Color.customRedBrown)
     }
