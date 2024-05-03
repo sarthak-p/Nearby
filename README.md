@@ -14,17 +14,21 @@ Before you begin, ensure you have met the following requirements:
 
 To clone the repository using HTTPS, run the following command:
 
+```bash
 git clone https://github.com/SaiSamarth123/Nearby.git
+```
 
 To clone using SSH, use:
 
+```bash
 git clone git@github.com:SaiSamarth123/Nearby.git
-
+```
 
 After cloning the project, navigate to the project directory:
 
+```bash
 cd Nearby
-
+```
 
 ## Opening the Project in Xcode
 
@@ -50,10 +54,6 @@ To run the app on a physical iPhone, you need to do some additional setup:
 6. Click the `Run` button or press `Cmd + R` to build and run the project on your iPhone.
 
 You might need to go to `Settings > General > Device Management` on your iPhone and trust the developer certificate for your Apple ID before the app will run.
-
-## Contributions
-
-Contributions are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
